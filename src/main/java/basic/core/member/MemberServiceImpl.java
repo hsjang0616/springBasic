@@ -12,8 +12,11 @@ package basic.core.member;
  * 2023/03/12        janghyoseong       최초 생성
  */
 public class MemberServiceImpl implements MemberService {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
 
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     @Override
     public void joinMember(Member member) {
