@@ -8,17 +8,6 @@ import basic.core.order.OrderService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-/**
- * packageName    : basic.core
- * fileName       : OrderApp
- * author         : janghyoseong
- * date           : 2023/05/14
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023/05/14        janghyoseong       최초 생성
- */
 public class OrderApp {
 
     public static void main(String[] args) {
@@ -26,16 +15,15 @@ public class OrderApp {
 //        MemberService memberService = appConfig.memberService();
 //        OrderService orderService = appConfig.orderService();
 
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-
-        MemberService memberService = applicationContext.getBean("memberServic e", MemberService.class);
-        OrderService orderService = applicationContext.getBean("orderService", OrderService.class);
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService = ac.getBean("memberService", MemberService.class);
+        OrderService orderService = ac.getBean("orderService", OrderService.class);
 
         Long memberId = 1L;
         Member member = new Member(memberId, "memberA", Grade.VIP);
         memberService.joinMember(member);
 
-        Order order = orderService.createOrder(memberId, "itemA", 20000);
+        Order order = orderService.createOrder(memberId, "itemA", 10000);
         System.out.println("odeer: " + order);
         System.out.println("odeer.calculatePrice: " + order.calculatePrice());
 

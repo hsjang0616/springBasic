@@ -1,8 +1,6 @@
 package basic.core;
 
-import basic.core.discount.DiscountPolicy;
 import basic.core.discount.FixDiscountPolicy;
-import basic.core.discount.RateDiscountPolicy;
 import basic.core.member.MemberService;
 import basic.core.member.MemberServiceImpl;
 import basic.core.member.MemoryMemberRepository;
@@ -12,38 +10,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * packageName    : basic.core
- * fileName       : AppConfig
- * author         : janghyoseong
- * date           : 2023/07/22
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023/07/22        janghyoseong       최초 생성
+ * AppConfig의 등장ㅇ로 애플리케이션이 크게 사용 영역과 객체를 생성하고 수엏하는 영역으로 분리
  */
-
 @Configuration
 public class AppConfig {
+
 
     @Bean
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
-
     @Bean
     public MemoryMemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
-
     @Bean
     public OrderService orderService() {
-        return new OrderServiceImpl(memberRepository(), discountPolicy());
+        return new OrderServiceImpl(memberRepository(), fixDiscountPolicy());
     }
 
     @Bean
-    public DiscountPolicy discountPolicy() {
-//        return new FixDiscountPolicy();
-        return new RateDiscountPolicy();
+    public FixDiscountPolicy fixDiscountPolicy() {
+        return new FixDiscountPolicy();
     }
 }
